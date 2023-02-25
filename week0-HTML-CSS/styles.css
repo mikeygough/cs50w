@@ -1,0 +1,98 @@
+body {
+    background-color: #202124;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 64px;
+    margin-bottom: 25px;
+}
+
+div > form {
+    text-align: center;
+}
+
+#searchbox {
+   border-radius: 25px;
+   border: 0.2px #FFFFFF solid;
+   background-color: #202124;
+   height: 20px;
+   width: 30%;
+   color: #FFFFFF;
+   padding-left: 30px;
+   background-image: url("search.svg");
+   background-position: left 5px top;
+   background-repeat: no-repeat;
+   background-size: contain;
+   }
+
+#searchbuttondiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#searchbuttondiv > button {
+    margin: 10px;
+}
+
+#searchbutton {
+    background-color: #303134;
+    color: #FFFFFF;
+    border: none;
+    height: 35px;
+    width: 130px;
+    border-radius: 5px;
+}
+
+/* hide topnav overflow */
+.topnav {
+    overflow: hidden;
+}
+
+/* style the links inside the navigation bar */
+.topnav a {
+    float: right;
+    color: #BEC1C5;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* grid */
+#advancedsearchid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr;
+    grid-gap: 16px;
+    color: #BDC1C6;
+    text-align: left;
+}
+
+#advancedsearchid > .leftlabel {
+    grid-column: 1 / 2;
+}
+
+#advancedsearchid >.rightlabel {
+    grid-column: 3;
+}
+
+#advancedsearchid input, button {
+    grid-column: 2 / 3;
+}
+
+#advancedsearchid label > span {
+    color: #FFFFFF;
+}
+
+#advancedsearchbutton {
+    background-color: #8ab4f8;
+    color: #FFFFFF;
+    border: none;
+    height: 35px;
+    width: 130px;
+    border-radius: 5px;
+}
