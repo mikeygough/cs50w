@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ entry }}
+{% endblock %}
+
+{% block body %}
+    {% if entry %}
+        {{ html_entry|safe }}
+        <a href="{% url 'wiki:editpage' entry%}">Edit</a>
+    {% else %}
+        Error, no entry found!
+    {% endif %}
+{% endblock %}
