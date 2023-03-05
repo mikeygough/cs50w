@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Active Listings</h2>
+
+    {% for listing in all_listings %}
+        <div>
+            <a href="{% url 'listing' listing.id %}"><h5>{{ listing.title }}</h5></a>
+            <h5 style="display:inline">Auction Status</h5>
+            {% if listing.auction_open %}
+                <span class="badge badge-success">Open</span>
+                <p>{{ listing.description }}</p>
+                    {% if listing.highest_bid == None %}
+                        <p>Best Bid: {{ listing.starting_bid }}</p>
+                    {% else %}
+                        <p>Best Bid: {{ listing.highest_bid }}</p>
+                    {% endif %}
+            {% else %}
+                <span class="badge badge-danger">Closed</span>
+            {% endif %}
+            <br>
+            {% if listing.image %}
+                <img src="{{ listing.image }}" alt="Test" width="125" height="125">
+            {% endif %}
+        </div>
+        </br>
+    {% endfor %}
+
+{% endblock %}

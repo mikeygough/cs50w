@@ -1,0 +1,112 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <div>
+        <h5>{{ listing.title }}</h5>
+        <p>{{ listing.description }}</p>
+
+        <br>
+
+        {% if listing.image %}
+            <img src="{{ listing.image }}" alt="Test" width="125" height="125">
+        {% endif %}
+    </div>
+
+    <br>
+    <br>
+
+    <h5 style="display:inline">Auction Status</h5>
+    {% if listing.auction_open %}
+        <span class="badge badge-success">Open</span>
+
+        <br>
+
+        {% if user.is_authenticated %}
+
+            {% if listing.creator == user %}
+                <br>
+                <p><i>You are currently signed in as the creator of this listing.</i></p>
+                <p><i>Would you like to close the auction
+                    for the current price of <b>{{ highest_bid }}</b>?</i></p>
+                <form action="{% url 'listing' listing.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Close Auction" name="closeauction">
+                </form>
+                <br>
+            {% endif %}
+
+            <br>
+
+            <h5>Watchlist</h5>
+                {% if listing.id in watchlist %}
+                    <form action="{% url 'listing' listing.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Remove from Watchlist" name="removeitem">
+                    </form>
+                {% else %}
+                        <form action="{% url 'listing' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Add to Watchlist" name="additem">
+                        </form>
+                {% endif %}
+
+                <br>
+                <br>
+
+                <h5>Make Bid:</h5>
+                <p style="display:inline">Starting Bid: {{ listing.starting_bid }}</p>
+                <p style="display:inline"><b>Highest Bid: {{ highest_bid }}</b></p>
+                <p><i>Your bid must be higher than the current highest bid of <b>{{ highest_bid}}</b>.</i></p>
+                <form action="{% url 'listing' listing.id %}" method="post">
+                    {% csrf_token %}
+                    {{ bid_form }}
+                    <input type="submit" value="Make Bid">
+                </form>
+
+                <br>
+                <br>
+
+                <h5>Post Comment:</h5>
+                <form action="{% url 'listing' listing.id %}" method="post">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <input type="submit" value="Post Comment">
+                </form>
+
+                <br>
+
+            {% else %}
+                Log in to bid or add to watchlist.
+            {% endif %}
+
+    {% else %}
+        <span class="badge badge-danger">Closed</span>
+
+        <br>
+        <br>
+
+        <h5>Bidding is closed!</h5>
+
+        {% if listing.winner == user %}
+            <br>
+
+            <h5>You won this auction!</h5>
+        {% endif %}
+
+    {% endif %}
+
+    <br>
+
+    <h5>Comments</h5>
+
+    <div>
+        {% for comment in comments %}
+            {{ comment.title }}
+            {{ comment.body }}
+            <p>Posted by: {{ comment.author }} on {{ comment.created_at }}</p>
+            <br>
+        {% endfor %}
+    </div>
+
+{% endblock %}
