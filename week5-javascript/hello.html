@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello</title>
+        <script>
+            // run this code once the DOM Content Loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('form').onsubmit = function() {
+                    const name = document.querySelector('#name').value;
+                    alert(`Hello, ${name}!`);
+                };
+            });
+        </script>
+
+    </head>
+    
+    <body>
+        <h1>Hello!</h1>
+        <form>
+            <input autofocus id="name" placeholder="Name" type="text">
+            <input type="submit">
+    </body>
+
+</html>
+
+<!-- document.querySelector('tag') -->
+<!-- document.querySelector('#id') -->
+<!-- document.querySelector('.class') -->

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Colors</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+
+                document.querySelector('select').onchange = function() {
+                    document.querySelector('#hello').style.color = this.value;
+                }
+
+                // // returns javascript array (node list) of all buttons
+                // document.querySelectorAll('button').forEach(function(button) {
+                //     button.onclick = function() {
+                //         document.querySelector('#hello').style.color = button.dataset.color;
+                //     }
+                // });
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h1 id="hello">Hello</h1>
+        <!-- data attributes -->
+        <select>
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+        <!-- <button data-color="red">Red</button>
+        <button data-color="blue">Blue</button>
+        <button data-color="green">Green</button> -->
+    </body>
+
+</html>

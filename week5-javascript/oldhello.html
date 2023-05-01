@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello</title>
+        <script>
+
+            function hello() {
+                // retrieve the first instance of h1
+                // FIRST
+                // let heading = document.querySelector('h1');
+                // SECOND WAY
+                // creating a variable who's value is never going to change. never going to reassign variable
+                // name to something else.
+                const heading = document.querySelector('h1');
+                // === is the strong equality operator which checks for value AND type.
+                // the weaker way is == which allows for different types.
+                if (heading.innerHTML === 'Hello!') {
+                    heading.innerHTML = 'Goodbye!';
+                } else {
+                    heading.innerHTML = 'Hello!';
+                }
+                
+            }
+            
+        </script>
+    </head>
+    
+    <body>
+        <h1>Hello!</h1>
+        <button onclick="hello()">Click Here</button>
+    </body>
+
+</html>
+
