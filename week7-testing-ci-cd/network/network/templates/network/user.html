@@ -1,0 +1,41 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div id='user-section' class="container border">
+        <h4>{{ searched_user.username }}</h4>
+        <h5>Following: {{ searched_user.following_count }}</h5>
+        <h5>Followers: {{ searched_user.follower_count }}</h5>
+        {% if user.is_authenticated %}
+            {% if searched_user.username != user.username %}
+                {% if following %}
+                    <form action="{% url 'user_view' searched_user %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Unfollow" name="un" class="btn btn-primary">
+                    </form>
+                {% else %}
+                    <form action="{% url 'user_view' searched_user %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Follow" name="follow" class="btn btn-primary">
+                    </form>
+                {% endif %}
+                <br>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div id='posts-section' class="container border">
+        <h4>Posts</h4>
+        <!-- if no posts -->
+        {% if not all_posts %}
+            <h5>{{ searched_user.username }} has no posts!</h5>
+        {% endif %}
+        {% for post in all_posts %}
+            <div id='individual-post' class="container border">
+                <p><strong>{{post.author}}</strong></p>
+                <p>{{post.body}}</p>
+                <p><small>{{post.created_at}}</small></p>
+                <p><small>Likes: {{post.likes}}</small></p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

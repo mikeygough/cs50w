@@ -1,0 +1,8 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div id='error-section' class="container border">
+        <h5>Error</h5>
+        Username <strong>{{ searched_user }}</strong> {{ message }}
+    </div>
+{% endblock %}

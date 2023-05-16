@@ -1,0 +1,59 @@
+#new-post-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#posts-section {
+    margin-top: 10px;
+}
+
+#error-section{
+    margin-top: 10px;
+}
+
+#individual-post {
+    margin-bottom: 10px;
+}
+
+/* nested styling */
+#individual-post p {
+    margin:0
+}
+
+#user-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+Textarea {
+    width: 100%
+}
+
+#posts-paginator {
+    margin-top: 10px;
+}
+
+.edit-post-button {
+    margin-bottom: 10px;
+}
+
+.submit-edited-post-button {
+    margin-bottom: 10px;
+    display: none;
+}
+
+.likeheart {
+    margin-bottom: 10px;
+}
+
+.post-likes-header {
+    display: inline-block;
+}
+
+.post-likes-value {
+    display: inline-block;
+}
+
+a {
+    color: black;
+}

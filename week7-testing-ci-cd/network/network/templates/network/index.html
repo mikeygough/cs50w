@@ -1,0 +1,71 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+    <div id='new-post-section' class='container border'>
+        <h4>New Post</h4>
+        <form action="{% url 'index' %}" method="post" id="newpost-form">
+            {% csrf_token %}
+            {{ post_form }}
+            <br>
+            <input type="submit" value="Post" class="btn btn-primary"/>
+        </form>
+        <br>
+    </div>
+    {% endif %}
+
+    <div id='posts-section' class="container border">
+        <h4>Posts</h4>
+        {% for post in page_obj %}
+            <!-- add data attributes -->
+            <div id='individual-post' class="container border" data-author='{{ post.author }}' data-post-id='{{ post.id }}' data-post-likes='{{ post.likes }}'>
+                <p class="post-author"><a href="{% url 'user_view' post.author %}"><strong>{{ post.author }}</strong></a></p>
+                <p class="post-body">{{ post.body }}</p>
+                <p class="post-created-at small">{{ post.created_at }}</p>
+                <p class="post-likes-header small">Likes:</p>
+                <p class="post-likes-value small">{{ post.likes }}</p>
+                {% if user.is_authenticated %}
+                    {% if post.author == user %}
+                        <br>
+                        <button type="button" class="edit-post-button btn btn-outline-secondary btn-sm">
+                            Edit Post
+                        </button>
+                        <!-- hide by default -->
+                        <button type="button" class="submit-edited-post-button btn btn-outline-primary btn-sm">
+                            Post
+                        </button>
+                    {% else %}
+                        {% if post.id in all_likes %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="heartlike bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="heartlike bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id='posts-paginator' class="container">
+        <nav aria-label="Page navigation example">
+            <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+            <ul class="pagination">
+                <br>
+                {% if page_obj.has_previous %}
+                    <!-- <li class="page-item"><a class="page-link" href="?page=1">First</a></li> -->
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                    <!-- <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li> -->
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
