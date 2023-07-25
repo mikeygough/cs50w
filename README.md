@@ -15,3 +15,6 @@ this course picks up where CS50x leaves off, diving more deeply into the design 
   <li>Testing, CI/CD</li>
   <li>Scalability and Security</li>
 </ul>
+
+<img src="cs50w-certificate.png"
+     alt="cs50w-certificate"/>
